@@ -1,0 +1,418 @@
+/* ========================================
+   Should I Bring my Umbrella?
+   Color system based on #003D99
+   ======================================== */
+
+:root {
+  --primary: #003D99;
+  --primary-back: #0052CC;
+  --primary-light: #1a5bbf;
+  --primary-dark: #002b6b;
+  --primary-faint: #e8f0fd;
+  --primary-glow: rgba(0, 61, 153, 0.12);
+
+  --yes-color: #005fa3;
+  --yes-bg: #dceefa;
+  --no-color: #1a7a42;
+  --no-bg: #e2f5ea;
+
+  --surface: #ffffff;
+  --surface-alt: #f4f7fc;
+  --text: #1a1a2e;
+  --text-muted: #5a6478;
+  --border: #d8e0ed;
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--primary-back);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* Background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hidden { display: none !important; }
+
+/* ---- App Container ---- */
+.app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  background: var(--surface);
+  border-radius: 20px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.12),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+/* ---- Screens ---- */
+.screen--loading,
+.screen--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 32px;
+  text-align: center;
+}
+
+/* Loading */
+.umbrella-icon {
+  font-size: 56px;
+  animation: bounce 1.6s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Error */
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.error-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+.btn-retry {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--surface);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-retry:hover { background: var(--primary-light); }
+
+/* ---- Result Screen ---- */
+.screen--result {
+  padding: 0;
+}
+
+/* Header */
+.header {
+  background: var(--primary);
+  color: #fff;
+  padding: 32px 28px 24px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+
+.location {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-weight: 500;
+}
+
+/* Answer */
+.answer {
+  text-align: center;
+  padding: 36px 28px 28px;
+}
+
+.answer__icon {
+  font-size: 72px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.answer__text {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.answer__subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* Answer variants */
+.answer--yes .answer__text { color: var(--yes-color); }
+.answer--yes { background: var(--yes-bg); }
+
+.answer--no .answer__text { color: var(--no-color); }
+.answer--no { background: var(--no-bg); }
+
+/* Section label */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* Conditions */
+.conditions {
+  padding: 24px 28px;
+}
+
+.conditions__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.condition-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.condition-card__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.condition-card__value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Forecast Timeline */
+.forecast {
+  padding: 24px 28px;
+  border-top: 1px solid var(--border);
+}
+
+.forecast__timeline {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.forecast-slot {
+  flex: 0 0 auto;
+  min-width: 72px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s;
+}
+
+.forecast-slot--rain {
+  border-color: var(--primary-light);
+  background: var(--primary-faint);
+}
+
+.forecast-slot__time {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.forecast-slot__icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.forecast-slot__temp {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* API Details */
+.api-details {
+  border-top: 1px solid var(--border);
+}
+
+.api-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.api-toggle:hover { background: var(--primary-faint); }
+
+.api-toggle__arrow {
+  font-size: 0.7rem;
+  transition: transform 0.25s;
+}
+
+.api-toggle__arrow.open { transform: rotate(180deg); }
+
+.api-panel {
+  padding: 0 28px 24px;
+}
+
+.api-info {
+  margin-bottom: 20px;
+}
+
+.api-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.api-info h4, .api-raw h4 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.api-info code {
+  font-size: 0.78rem;
+  background: var(--surface-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary-dark);
+  word-break: break-all;
+}
+
+.api-raw pre {
+  font-size: 0.72rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  overflow-x: auto;
+  max-height: 260px;
+  overflow-y: auto;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 16px 28px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover { text-decoration: underline; }
+
+/* ---- Animations ---- */
+.screen--result {
+  animation: fadeUp 0.5s ease-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  body { padding: 12px 8px; }
+  .app { border-radius: 16px; }
+  .title { font-size: 1.3rem; }
+  .answer__text { font-size: 1.6rem; }
+  .answer__icon { font-size: 56px; }
+  .header { padding: 24px 20px 20px; }
+  .conditions, .forecast, .api-panel { padding-left: 20px; padding-right: 20px; }
+  .api-toggle { padding-left: 20px; padding-right: 20px; }
+}

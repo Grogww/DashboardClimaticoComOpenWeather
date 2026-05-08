@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Should I Bring my Umbrella?</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- Loading State -->
+    <div class="screen screen--loading" id="screen-loading">
+      <div class="umbrella-icon">☂</div>
+      <p class="loading-text">Checking the skies for you...</p>
+    </div>
+
+    <!-- Main Result -->
+    <div class="screen screen--result hidden" id="screen-result">
+
+      <header class="header">
+        <h1 class="title">Should I Bring my Umbrella?</h1>
+        <p class="location" id="location-name">--</p>
+      </header>
+
+      <!-- Big Answer -->
+      <section class="answer" id="answer-section">
+        <div class="answer__icon" id="answer-icon"></div>
+        <h2 class="answer__text" id="answer-text">--</h2>
+        <p class="answer__subtitle" id="answer-subtitle">--</p>
+      </section>
+
+      <!-- Current Conditions -->
+      <section class="conditions">
+        <h3 class="section-label">Right Now</h3>
+        <div class="conditions__grid">
+          <div class="condition-card">
+            <span class="condition-card__label">Condition</span>
+            <span class="condition-card__value" id="cond-desc">--</span>
+          </div>
+          <div class="condition-card">
+            <span class="condition-card__label">Temperature</span>
+            <span class="condition-card__value" id="cond-temp">--</span>
+          </div>
+          <div class="condition-card">
+            <span class="condition-card__label">Humidity</span>
+            <span class="condition-card__value" id="cond-humidity">--</span>
+          </div>
+          <div class="condition-card">
+            <span class="condition-card__label">Wind</span>
+            <span class="condition-card__value" id="cond-wind">--</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forecast Timeline -->
+      <section class="forecast">
+        <h3 class="section-label">Next 6 Hours</h3>
+        <div class="forecast__timeline" id="forecast-timeline"></div>
+      </section>
+
+      <!-- API Details -->
+      <section class="api-details">
+        <button class="api-toggle" id="api-toggle">
+          <span>API Details &amp; Raw Response</span>
+          <span class="api-toggle__arrow" id="api-arrow">▼</span>
+        </button>
+        <div class="api-panel hidden" id="api-panel">
+          <div class="api-info">
+            <h4>Architecture</h4>
+            <p><strong>Pattern:</strong> MVC (Model-View-Controller)</p>
+            <p><strong>Flow:</strong> Browser → Express Server → OpenWeather API</p>
+            <h4>OpenWeather API Info</h4>
+            <p><strong>Base URL:</strong> <code>https://api.openweathermap.org/data/2.5</code></p>
+            <p><strong>Endpoints consumed by server:</strong></p>
+            <p><code>GET /weather?lat={lat}&lon={lon}&units=metric&lang=en&appid={key}</code></p>
+            <p><code>GET /forecast?lat={lat}&lon={lon}&units=metric&lang=en&appid={key}</code></p>
+            <p><strong>Auth:</strong> API Key via query parameter (<code>appid</code>) — stored in <code>.env</code>, never exposed to client</p>
+            <p><strong>Versioning:</strong> Path-based (<code>/data/2.5/</code>)</p>
+            <p><strong>HATEOAS:</strong> No</p>
+            <p><strong>Response format:</strong> JSON</p>
+            <h4>Internal API (this server)</h4>
+            <p><code>GET /api/weather?lat={lat}&lon={lon}</code></p>
+            <p>Returns processed data with umbrella recommendation.</p>
+          </div>
+          <div class="api-raw">
+            <h4>Raw Current Weather Response</h4>
+            <pre id="raw-current">--</pre>
+            <h4>Raw Forecast Response (next 6h)</h4>
+            <pre id="raw-forecast">--</pre>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Powered by <a href="https://openweathermap.org/" target="_blank" rel="noopener">OpenWeatherMap API</a></p>
+      </footer>
+    </div>
+
+    <!-- Error State -->
+    <div class="screen screen--error hidden" id="screen-error">
+      <div class="error-icon">⚠</div>
+      <p class="error-text" id="error-text">Something went wrong.</p>
+      <button class="btn-retry" id="btn-retry">Try Again</button>
+    </div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

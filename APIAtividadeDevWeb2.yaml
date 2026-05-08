@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: APIAtividadeDevWeb2
+  version: 1.0.0
+paths:
+  /api/weather:
+    get:
+      summary: RequestDadosExpress
+      operationId: >-
+        c_users_eduardo_documents_bruno_shouldibringmyumbrella_apiinterna_requestdadosexpress_yml
+      description: ''
+      tags:
+        - APIInterna
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: lat
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-27.0038'
+        - name: lon
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-51.1522'
+      servers:
+        - url: http://localhost:3020
+  /data/2.5/weather:
+    get:
+      summary: CurrentWeather
+      operationId: >-
+        c_users_eduardo_documents_bruno_shouldibringmyumbrella_openweatherapi_currentweather_yml
+      description: ''
+      tags:
+        - OpenWeatherAPI
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: lat
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-27.0038'
+        - name: lon
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-51.1522'
+        - name: units
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: metric
+        - name: lang
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: en
+        - name: appid
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: '{{API_KEY}}'
+      servers:
+        - url: https://api.openweathermap.org
+  /data/2.5/forecast:
+    get:
+      summary: 5DayForecast
+      operationId: >-
+        c_users_eduardo_documents_bruno_shouldibringmyumbrella_openweatherapi_5dayforecast_yml
+      description: ''
+      tags:
+        - OpenWeatherAPI
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: lat
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-27.0038'
+        - name: lon
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: number
+            format: double
+          example: '-51.1522'
+        - name: units
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: metric
+        - name: 'lang '
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: en
+        - name: appid
+          in: query
+          description: ''
+          required: true
+          schema:
+            type: string
+          example: '{{API_KEY}}'
+      servers:
+        - url: https://api.openweathermap.org
+servers: []
+components:
+  schemas: {}
+  requestBodies: {}
+  securitySchemes: {}

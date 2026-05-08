@@ -6,8 +6,7 @@ paths:
   /api/weather:
     get:
       summary: RequestDadosExpress
-      operationId: >-
-        c_users_eduardo_documents_bruno_shouldibringmyumbrella_apiinterna_requestdadosexpress_yml
+      operationId: getWeatherFromExpress
       description: ''
       tags:
         - APIInterna
@@ -36,8 +35,7 @@ paths:
   /data/2.5/weather:
     get:
       summary: CurrentWeather
-      operationId: >-
-        c_users_eduardo_documents_bruno_shouldibringmyumbrella_openweatherapi_currentweather_yml
+      operationId: getCurrentWeather
       description: ''
       tags:
         - OpenWeatherAPI
@@ -87,8 +85,7 @@ paths:
   /data/2.5/forecast:
     get:
       summary: 5DayForecast
-      operationId: >-
-        c_users_eduardo_documents_bruno_shouldibringmyumbrella_openweatherapi_5dayforecast_yml
+      operationId: get5DayForecast
       description: ''
       tags:
         - OpenWeatherAPI
